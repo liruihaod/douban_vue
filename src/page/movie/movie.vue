@@ -90,7 +90,6 @@
     watch:{
       hot(){
         if(!this.scrollKey){
-          console.log("zone")
               this.$nextTick(()=>{
             this.scroll = new BScroll(this.$refs.content, {
             startX: 0,

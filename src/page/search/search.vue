@@ -78,7 +78,6 @@
             this.result();
             this.movieStar();
                         this.text=this.$store.state.movie.movieQuery.query;
-
         },
         methods: {
             search() {
@@ -89,7 +88,7 @@
                 }
             },
             storeReturn(){
-                this.$router.go(-1);
+                this.$router.push("/");
             },
             result() {
                 if (!this.$route.query.q) return;
