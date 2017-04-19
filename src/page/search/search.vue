@@ -74,7 +74,6 @@
             }
         })
         ,
-
         mounted() {
             this.result();
             this.movieStar();

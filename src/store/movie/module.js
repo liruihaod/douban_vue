@@ -6,6 +6,7 @@ const mutations = {
     [type.FETCH_MOVIES](state, payload) {
         state.movies[payload.type].subjects =
             state.movies[payload.type].subjects.concat(payload.subjects);
+
         state.movies[payload.type].total = state.movies[payload.type].subjects.length;
     },
     [type.FETCH_MOVIES_QUERY](state, payload) {
@@ -53,12 +54,12 @@ const actions = {
 export default {
     state: {
         movies: {
-            [api.MOVIESTYPE.inTheaters]: {
+            in_theaters: {
                 total: 0,
                 subjects: [],
                 describe: '',
             },
-            [api.MOVIESTYPE.comingSoon]: {
+            coming_soon: {
                 total: 0,
                 subjects: [],
                 describe: '',

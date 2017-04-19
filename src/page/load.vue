@@ -27,9 +27,11 @@
         methods: {
             stopLoad(){
             this.$refs.load.style.opacity=0;
+            console.log("触发结束")
             },
             startLoad(){
              this.$refs.load.style.opacity=1;
+             console.log("触发开始")
             }
         }
        

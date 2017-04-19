@@ -52,7 +52,6 @@ export default {
     },
     gotoAbout(){
       this.$router.push({name:'about'})
-      // this.$emit("zone","zone");
     }
 
   }

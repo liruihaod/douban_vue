@@ -14,7 +14,7 @@
     <div class="book-content" ref="content">
       <div>
         <ul v-show="moviekey">
-          <li class="list-show" v-for="item in subjects">
+          <li class="list-show" v-for="item in hot">
           <router-link transition="fadeOutLeft" :to="{name: 'movieContent', params:{id:item.id}}">
             <mu-paper :zDepth="2">
               <img :src="item.images.large" alt="">
@@ -26,7 +26,7 @@
                     </li>
         </ul>
         <ul v-show="!moviekey">
-          <li class="list-show" v-for="item in subjects">
+          <li class="list-show" v-for="item in hotd">
           <router-link :to="{name: 'movieContent', params:{id:item.id}}">
             <mu-paper :zDepth="2">
               <img :src="item.images.large" alt="">
@@ -80,12 +80,29 @@
       }
     },
     computed:mapState({
-      subjects(state){
-        return state.movie.movies[this.tabName].subjects;
+      hot(state){
+        return state.movie.movies.in_theaters.subjects;
+      },
+      hotd(state){
+        return state.movie.movies.coming_soon.subjects;
       }
     }),
     watch:{
-      subjects:function(){
+      hot(){
+        if(!this.scrollKey){
+          console.log("zone")
+              this.$nextTick(()=>{
+            this.scroll = new BScroll(this.$refs.content, {
+            startX: 0,
+            startY: 0,
+            click:true
+          })
+          this.scrollKey=true;
+           this.$refs.loading.stopLoad();
+          })
+        }
+      },
+      hotd(){
         if(!this.scrollKey){
               this.$nextTick(()=>{
             this.scroll = new BScroll(this.$refs.content, {
@@ -96,9 +113,6 @@
           this.scrollKey=true;
            this.$refs.loading.stopLoad();
           })
-        }else {
-           this.$refs.loading.stopLoad();
-          this.scroll.refresh();
         }
       }
     },
@@ -121,7 +135,7 @@
         // 这里确保只调用一次
         if(!(this.$store.state.movie.movies[this.tabName].subjects&&
              this.$store.state.movie.movies[this.tabName].subjects.length>0)){
-                         this.$refs.loading.startLoad();
+            this.$refs.loading.startLoad();
              this.$store.dispatch(type.FETCH_MOVIES, { type: this.tabName })          
         }
       },
