@@ -9,6 +9,14 @@ import about from '@/page/Hello'
 
 Vue.use(Router)
 
+
+const Book = moive => require(['page/book/book'], book);
+const Music = moive => require(['page/music/music'], music);
+const Movie = moive => require(['page/movie/movie'], movie);
+const Content = moive => require(['page/movie/content'], content);
+const Search = moive => require(['page/search/search'], search);
+const About = about => require(['page/Hello'], about);
+
 export default new Router({
     mode: 'history',
     routes: [{
